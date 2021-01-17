@@ -1,0 +1,34 @@
+﻿@using Schiphol.Models
+@model FlightList
+
+<table>
+	<thead>
+		<tr>
+			<th>AircraftRegistration</th>
+			<th>ActualLandingTime</th>
+			<th>AircraftType</th>
+			<th>EstimatedLandingTime</th>
+			<th>Destinations</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (Flight flight in Model?.Flights)
+		{
+			<tr>
+				<td>@flight.AircraftRegistration</td>
+				<td>@flight.dtActualLandingTime</td>
+				<td>@flight.AircraftType?.IATAMain - @flight.AircraftType?.IATASub</td>
+				<td>@flight.dtEstimatedLandingTime</td>
+				<td>
+					@{ 
+						if (flight.Route != null)
+						{
+							string dest = string.Join(", ", flight.Route.Destinations);
+							WriteLiteral(dest);
+						}
+					}
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

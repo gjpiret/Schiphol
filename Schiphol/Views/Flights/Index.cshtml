@@ -1,0 +1,53 @@
+﻿@*
+	For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<button id="btnGetFlights" style="background-color:lightgreen;">GET FLIGHTS</button>
+
+<button id="btnGetAircraftTypes" style="background-color:lightsalmon;">GET AIRCRAFTTYPES</button>
+
+<div id="dataResult"></div>
+
+@section Scripts {
+	<script>
+		var pagenr = 0;
+		var currenttype = "";
+
+		$(document).ready(function () {
+			$('#btnGetFlights').click(function () {
+				getFlights();
+			});
+			$('#btnGetAircraftTypes').click(function () {
+				getAircraftTypes();
+			});
+		});
+
+		function getFlights() {
+			if (currenttype == "flights")
+				pagenr++;
+			else
+				pagenr = 0;
+			currenttype = "flights";
+
+			$("#dataResult").html("");
+			$.get(`/Flights/GetFlights?page=${pagenr}`, function (data) {
+				$("#dataResult").html(data);
+			});
+		}
+
+		function getAircraftTypes() {
+			if (currenttype == "aircrafttypes")
+				pagenr++;
+			else
+				pagenr = 0;
+			currenttype = "aircrafttypes";
+
+			$("#dataResult").html("");
+			$.get(`/Flights/GetAircraftTypes?page=${pagenr}`, function (data) {
+				$("#dataResult").html(data);
+			});
+		}
+	</script>
+}

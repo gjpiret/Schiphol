@@ -1,0 +1,24 @@
+﻿@using Schiphol.Models
+@model AircraftTypeList
+
+<table>
+	<thead>
+		<tr>
+			<th>IATAMain</th>
+			<th>IATASub</th>
+			<th>LongDescription</th>
+			<th>ShortDescription</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (AircraftType ac in Model?.AircraftTypes)
+		{
+			<tr>
+				<td>@ac.IATAMain</td>
+				<td>@ac.IATASub</td>
+				<td>@ac.LongDescription</td>
+				<td>@ac.ShortDescription</td>
+			</tr>
+		}
+	</tbody>
+</table>
